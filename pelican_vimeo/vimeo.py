@@ -71,10 +71,10 @@ class Vimeo(Directive):
         if 'align' in self.options:
             align = self.options['align']
 
-        url = 'https://player.vimeo.com/video/%s' % videoID
-        div_block = '<div class="vimeo" align="%s">' % align
-        embed_block = '<iframe width="%s" height="%s" src="%s" '\
-                      'frameborder="0"></iframe>' % (width, height, url)
+        url = 'https://player.vimeo.com/video/{}'.format(videoID)
+        div_block = '<div class="vimeo" align="{}">'.format(align)
+        embed_block = '<iframe width="{}" height="{}" src="{}" '\
+                      'frameborder="0"></iframe>'.format(width, height, url)
 
         return [
             nodes.raw('', div_block, format='html'),
