@@ -8,7 +8,7 @@ and articles.
 Installation
 ============
 
-To install pelican-gist, simply install it from PyPI:
+To install pelican-vimeo, simply install it from PyPI:
 
 .. code-block:: bash
 
