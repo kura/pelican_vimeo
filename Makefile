@@ -6,6 +6,6 @@ uninstall:
 	pip uninstall pelican_vimeo
 
 pypi:
-	python setup.py sdist_upload
+	python setup.py sdist upload
 	python setup.py bdist_egg upload
 	python setup.py bdist_wheel upload
