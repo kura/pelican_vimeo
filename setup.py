@@ -6,7 +6,7 @@ download_url = 'https://github.com/kura/pelican_vimeo/archive/{}.zip'.format(ver
 
 setup(name='pelican_vimeo',
       version=version,
-      url='https://github.com/kura/pelican_gist',
+      url='https://github.com/kura/pelican_vimeo',
       download_url=download_url,
       author="Kura",
       author_email="kura@kura.io",
