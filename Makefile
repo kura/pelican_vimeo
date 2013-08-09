@@ -1,4 +1,4 @@
-.PHONY install uninstall pypi
+.PHONY: install uninstall pypi
 install:
 	python setup.py install
 
