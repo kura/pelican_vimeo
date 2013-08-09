@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 version = __import__('pelican_vimeo').__version__
-download_url = 'https://github.com/kura/pelican_gist/archive/{}.zip'.format(version)
+download_url = 'https://github.com/kura/pelican_vimeo/archive/{}.zip'.format(version)
 
 setup(name='pelican_vimeo',
       version=version,
