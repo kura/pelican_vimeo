@@ -19,7 +19,7 @@
 
 # -*- coding: utf-8 -*-
 __title__ = 'pelican-vimeo'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Kura'
 __credits__ = ["Kura", ]
 __maintainer__ = "Kura"
