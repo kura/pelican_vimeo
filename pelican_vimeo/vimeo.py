@@ -31,7 +31,7 @@ class Vimeo(Directive):
     Based on the YouTube directive by Brian Hsu:
     https://gist.github.com/1422773
 
-    VIDEO_ID is required, with / height are optional integer,
+    VIDEO_ID is required, width / height are optional integer,
     and align could be left / center / right.
 
     Usage:
