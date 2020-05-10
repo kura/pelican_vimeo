@@ -61,6 +61,10 @@ Which will result in:
     <iframe width="800" height="500" src="https://player.vimeo.com/video/37818131" frameborder="0"></iframe>
     </div>
 
+Additionally, you can also specify `player URL parameters
+<https://vimeo.zendesk.com/hc/en-us/articles/360001494447>`__ appended
+to the video ID (e.g., ``.. vimeo:: 37818131?autoplay=1``).
+
 License
 =======
 
