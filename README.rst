@@ -48,7 +48,7 @@ You can also specify a `width`, `height` and `alignment`
 
 .. code-block:: rst
 
-	.. vimeo:: 37818131
+    .. vimeo:: 37818131
             :width: 800
             :height: 500
             :align: center
