@@ -38,7 +38,8 @@ Which will result in:
 .. code-block:: html
 
     <div class="vimeo" align="left">
-    <iframe width="420" height="315" src="https://player.vimeo.com/video/VIDEO_ID" frameborder="0"></iframe>
+    <iframe width="420" height="315" src="https://player.vimeo.com/video/VIDEO_ID" frameborder="0"
+    webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </div>
 
 Additional arguments
@@ -58,7 +59,8 @@ Which will result in:
 .. code-block:: html
 
     <div class="vimeo" align="center">
-    <iframe width="800" height="500" src="https://player.vimeo.com/video/37818131" frameborder="0"></iframe>
+    <iframe width="800" height="500" src="https://player.vimeo.com/video/37818131" frameborder="0"
+    webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </div>
 
 License
