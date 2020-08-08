@@ -74,35 +74,35 @@ class Vimeo(Directive):
     # all except "#t" (since this is a fragment identifier, not an URL
     # parameter):
     url_options = (
-        'autopause',
-        'autoplay',
-        'background',
-        'byline',
-        'color',
-        'controls',
-        'dnt',
-        'fun',
-        'loop',
-        'muted',
-        'playsinline',
-        'portrait',
-        'quality',
-        'speed',
-        'texttrack',
-        'title',
-        'transparent',
+        "autopause",
+        "autoplay",
+        "background",
+        "byline",
+        "color",
+        "controls",
+        "dnt",
+        "fun",
+        "loop",
+        "muted",
+        "playsinline",
+        "portrait",
+        "quality",
+        "speed",
+        "texttrack",
+        "title",
+        "transparent",
     )
 
     def align(argument):
         """Conversion function for the "align" option."""
-        return directives.choice(argument, ('left', 'center', 'right'))
+        return directives.choice(argument, ("left", "center", "right"))
 
     required_arguments = 1
     option_spec = {
-        'width': directives.positive_int,
-        'height': directives.positive_int,
-        'align': align,
-        't': directives.unchanged,
+        "width": directives.positive_int,
+        "height": directives.positive_int,
+        "align": align,
+        "t": directives.unchanged,
     }
     option_spec.update(
         {option: directives.unchanged for option in url_options}
@@ -113,42 +113,39 @@ class Vimeo(Directive):
 
     def run(self):
         videoID = self.arguments[0].strip()
-        width = 420
-        height = 315
-        align = 'left'
 
-        if 'width' in self.options:
-            width = self.options['width']
+        width = self.options.get("width", 420)
+        height = self.options.get("height", 315)
+        align = self.options.get("align", "left")
 
-        if 'height' in self.options:
-            height = self.options['height']
+        url = "https://player.vimeo.com/video/{}".format(videoID)
 
-        if 'align' in self.options:
-            align = self.options['align']
-
-        url = 'https://player.vimeo.com/video/{}'.format(videoID)
-
-        url_params = {option: self.options[option]
-                      for option in self.url_options
-                      if option in self.options}
+        url_params = {
+            option: self.options[option]
+            for option in self.url_options
+            if option in self.options
+        }
 
         if url_params:
-            url += '?' + urlencode(url_params)
+            url += "?" + urlencode(url_params)
 
-        if 't' in self.options:
-            url += '#t=' + quote(self.options['t'])
+        if "t" in self.options:
+            url += "#t=" + quote(self.options["t"])
 
         div_block = '<div class="vimeo" align="{}">'.format(align)
-        embed_block = '<iframe width="{}" height="{}" src="{}" '\
-                      'frameborder="0" webkitAllowFullScreen '\
-                      'mozallowfullscreen allowFullScreen></iframe>'\
-                      ''.format(width, height, url)
+        embed_block = (
+            '<iframe width="{}" height="{}" src="{}" '
+            'frameborder="0" webkitAllowFullScreen '
+            "mozallowfullscreen allowFullScreen></iframe>"
+            "".format(width, height, url)
+        )
 
         return [
-            nodes.raw('', div_block, format='html'),
-            nodes.raw('', embed_block, format='html'),
-            nodes.raw('', '</div>', format='html')]
+            nodes.raw("", div_block, format="html"),
+            nodes.raw("", embed_block, format="html"),
+            nodes.raw("", "</div>", format="html"),
+        ]
 
 
 def register():
-    directives.register_directive('vimeo', Vimeo)
+    directives.register_directive("vimeo", Vimeo)
