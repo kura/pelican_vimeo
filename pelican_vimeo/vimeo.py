@@ -21,6 +21,8 @@
 
 from __future__ import unicode_literals
 
+from urllib.parse import urlencode, quote
+
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 
@@ -39,19 +41,72 @@ class Vimeo(Directive):
         :width: 640
         :height: 480
         :align: center
+
+    Additionally, this plugin allows to specify the following `Vimeo
+    player URL parameters
+    <https://vimeo.zendesk.com/hc/en-us/articles/360001494447>`__
+    as options (values are passed through):
+
+    * autopause
+    * autoplay
+    * background
+    * byline
+    * color
+    * controls
+    * dnt
+    * fun
+    * loop
+    * muted
+    * playsinline
+    * portrait
+    * quality
+    * speed
+    * t
+    * texttrack
+    * title
+    * transparent
+
+    If you encounter Vimeo player URL parameters not supported by this
+    plugin, you can also specify those appended to the video ID
+    (e.g., ``.. vimeo:: 37818131?some_option=some_value&foo=bar``).
     """
+
+    # all except "#t" (since this is a fragment identifier, not an URL
+    # parameter):
+    url_options = (
+        'autopause',
+        'autoplay',
+        'background',
+        'byline',
+        'color',
+        'controls',
+        'dnt',
+        'fun',
+        'loop',
+        'muted',
+        'playsinline',
+        'portrait',
+        'quality',
+        'speed',
+        'texttrack',
+        'title',
+        'transparent',
+    )
 
     def align(argument):
         """Conversion function for the "align" option."""
         return directives.choice(argument, ('left', 'center', 'right'))
 
     required_arguments = 1
-    optional_arguments = 2
     option_spec = {
         'width': directives.positive_int,
         'height': directives.positive_int,
-        'align': align
+        'align': align,
+        't': directives.unchanged,
     }
+    option_spec.update(
+        {option: directives.unchanged for option in url_options}
+    )
 
     final_argument_whitespace = False
     has_content = False
@@ -72,6 +127,17 @@ class Vimeo(Directive):
             align = self.options['align']
 
         url = 'https://player.vimeo.com/video/{}'.format(videoID)
+
+        url_params = {option: self.options[option]
+                      for option in self.url_options
+                      if option in self.options}
+
+        if url_params:
+            url += '?' + urlencode(url_params)
+
+        if 't' in self.options:
+            url += '#t=' + quote(self.options['t'])
+
         div_block = '<div class="vimeo" align="{}">'.format(align)
         embed_block = '<iframe width="{}" height="{}" src="{}" '\
                       'frameborder="0" webkitAllowFullScreen '\
