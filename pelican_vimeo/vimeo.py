@@ -74,7 +74,9 @@ class Vimeo(Directive):
         url = 'https://player.vimeo.com/video/{}'.format(videoID)
         div_block = '<div class="vimeo" align="{}">'.format(align)
         embed_block = '<iframe width="{}" height="{}" src="{}" '\
-                      'frameborder="0"></iframe>'.format(width, height, url)
+                      'frameborder="0" webkitAllowFullScreen '\
+                      'mozallowfullscreen allowFullScreen></iframe>'\
+                      ''.format(width, height, url)
 
         return [
             nodes.raw('', div_block, format='html'),
